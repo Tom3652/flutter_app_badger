@@ -3,15 +3,14 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class FlutterAppBadger {
-  static const MethodChannel _channel =
-      const MethodChannel('g123k/flutter_app_badger');
+  static const MethodChannel _channel = const MethodChannel('flutter_app_badger');
 
-  static void updateBadgeCount(int count) {
-    _channel.invokeMethod('updateBadgeCount', {"count": count});
+  static Future<void> updateBadgeCount(int count) {
+    return _channel.invokeMethod('updateBadgeCount', {"count": count});
   }
 
-  static void removeBadge() {
-    _channel.invokeMethod('removeBadge');
+  static Future<void> removeBadge() {
+    return _channel.invokeMethod('removeBadge');
   }
 
   static Future<bool> isAppBadgeSupported() async {

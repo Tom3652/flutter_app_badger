@@ -3,7 +3,7 @@
 @implementation FlutterAppBadgerPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   FlutterMethodChannel* channel = [FlutterMethodChannel
-      methodChannelWithName:@"g123k/flutter_app_badger"
+      methodChannelWithName:@"flutter_app_badger"
             binaryMessenger:[registrar messenger]];
   FlutterAppBadgerPlugin* instance = [[FlutterAppBadgerPlugin alloc] init];
   [registrar addMethodCallDelegate:instance channel:channel];
@@ -14,7 +14,7 @@
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error){}];
     } else {
-        UIUserNotificationSettings* notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+        UIUserNotificationSettings* notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:[[UIApplication sharedApplication] currentUserNotificationSettings].categories];
         
         [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
     }
